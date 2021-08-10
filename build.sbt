@@ -18,18 +18,4 @@ fork := true
 
 import scala.sys.process._
 
-lazy val pythonLdFlags = {
-  val withoutEmbed = "python3-config --ldflags".!!
-  if (withoutEmbed.contains("-lpython")) {
-    withoutEmbed.split(' ').map(_.trim).filter(_.nonEmpty).toSeq
-  } else {
-    val withEmbed = "python3-config --ldflags --embed".!!
-    withEmbed.split(' ').map(_.trim).filter(_.nonEmpty).toSeq
-  }
-}
-
-lazy val pythonLibsDir = {
-  pythonLdFlags.find(_.startsWith("-L")).get.drop("-L".length)
-}
-
-javaOptions += s"-Djna.library.path=$pythonLibsDir"
+javaOptions += s"-Djna.library.path=${"python3-config --prefix".!!.trim}/lib"

@@ -7,4 +7,6 @@ object Main extends App {
   val listLengthPython = py.Dynamic.global.len(List(1, 2, 3, 4, 5).toPythonProxy)
   val listLength       = listLengthPython.as[Int]
   println(listLength)
+  val tf               = py.module("tensorflow")
+  println(tf)
 }
