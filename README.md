@@ -52,7 +52,9 @@ $ brew install poetry
 ### venv 생성
 
 ```
-$ poetry shell
+$ poetry config virtualenvs.in-project true
+$ poetry config virtualenvs.path "./.venv"
+$ poetry install && poetry update
 ```
 
 ---
